@@ -26,7 +26,7 @@ h11 {
 </head>
 <body>
 
-<form class="form-horizontal">
+<form id="form" class="form-horizontal" onsubmit="return valida()">
 <fieldset>
 <div class="panel panel-primary">
     <div class="panel-heading">Cadastro de Cliente</div>
@@ -49,11 +49,15 @@ h11 {
 </div>
 </div>
 
+<div class="alert alert-success" role="alert" id="msg" style="display:none">
+  Cliente cadastrado com sucesso!
+</div>
+
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-2 control-label" for="Nome">Nome <h11>*</h11></label>  
   <div class="col-md-8">
-  <input id="nome_cliente" name="nome_cliente" placeholder="" class="form-control input-md" oninvalid="this.setCustomValidity('Este campo é obrigatório!')" required="" type="text">
+  <input id="nome_cliente" name="nome_cliente" placeholder="" class="form-control input-md"  oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Nome é obrigatório!')" required="" type="text">
   </div>
 </div>
 
@@ -61,20 +65,20 @@ h11 {
 <div class="form-group">
   <label class="col-md-2 control-label" for="Nome">CPF <h11>*</h11></label>  
   <div class="col-md-2">
-  <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
+  <input id="cpf" name="cpf"  oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('CPF é obrigatório!')" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
   </div>
   
   <label class="col-md-1 control-label" for="Nome">Nascimento<h11>*</h11></label>  
   <div class="col-md-2">
-  <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+  <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA"  oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Data de nascimento é obrigatório!')" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" >
 </div>
 
 <!-- Multiple Radios (inline) -->
 
-  <label class="col-md-1 control-label" for="radios">Sexo <h11>*</h11></label>
+  <label class="col-md-1 control-label" for="radios">Sexo <h11></h11></label>
   <div class="col-md-4"> 
     <label required="" class="radio-inline" for="radios-0" >
-      <input name="sexo" id="sexo" value="feminino" type="radio" required>
+      <input name="sexo" id="sexo" value="feminino" type="radio" >
       Feminino
     </label> 
     <label class="radio-inline" for="radios-1">
@@ -86,11 +90,11 @@ h11 {
 
 <!-- Prepended text-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="prependedtext">Telefone <h11>*</h11></label>
+  <label class="col-md-2 control-label" for="prependedtext">Telefone <h11></h11></label>
   <div class="col-md-2">
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-      <input id="prependedtext" name="prependedtext" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
+      <input id="prependedtext" name="prependedtext" class="form-control" placeholder="XX XXXXX-XXXX" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
       OnKeyPress="formatar('## #####-####', this)">
     </div>
   </div>
@@ -103,7 +107,7 @@ h11 {
   <div class="col-md-5">
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-      <input id="prependedtext" name="prependedtext" class="form-control" placeholder="email@email.com" required="" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+      <input id="prependedtext" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Email é obrigatório!')" name="prependedtext" class="form-control" placeholder="email@email.com" required="" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
     </div>
   </div>
 </div>
@@ -113,7 +117,7 @@ h11 {
 <div class="form-group">
   <label class="col-md-2 control-label" for="CEP">CEP <h11>*</h11></label>
   <div class="col-md-2">
-    <input id="cep" name="cep" placeholder="Apenas números" class="form-control input-md" required="" value="" type="search" maxlength="9" pattern="[0-9]+$">
+    <input id="cep" name="cep" placeholder="Apenas números" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('CEP é obrigatório!')" class="form-control input-md" required="" value="" type="search" maxlength="9" pattern="[0-9]+$">
   </div>
   <div class="col-md-2">
       <button type="button" class="btn btn-primary" onclick="pesquisacep(cep.value)">Pesquisar</button>
@@ -133,7 +137,7 @@ h11 {
     <div class="col-md-2">
     <div class="input-group">
       <span class="input-group-addon">Nº <h11>*</h11></span>
-      <input id="numero" name="numero" class="form-control" placeholder="" required=""  type="text">
+      <input id="numero" name="numero" class="form-control" placeholder="" required=""  oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Número é obrigatório!')"  type="text">
     </div>
     
   </div>
@@ -168,9 +172,9 @@ h11 {
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="Estado Civil">Estado Civil <h11>*</h11></label>
+  <label class="col-md-2 control-label" for="Estado Civil">Estado Civil <h11></h11></label>
   <div class="col-md-2">
-    <select required id="estado-civil" name="estado-civil" class="form-control">
+    <select  id="estado-civil" name="estado-civil" class="form-control">
         <option value=""></option>
       <option value="Solteiro(a)">Solteiro(a)</option>
       <option value="Casado(a)">Casado(a)</option>
@@ -215,8 +219,8 @@ h11 {
 <div class="form-group">
   <label class="col-md-2 control-label" for="Cadastrar"></label>
   <div class="col-md-8">
-    <button id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">Cadastrar</button>
-    <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
+    <button id="cadastrar" name="cadastrar" class="btn btn-success" type="Submit">Cadastrar</button>
+    <button id="cancelar" name="cancelar" class="btn btn-danger" type="Reset" >Cancelar</button>
   </div>
 </div>
 
@@ -367,7 +371,16 @@ else if(idade()<18) {
 
  }
 
+function valida() {
+	document.getElementById('msg').style.display='block';
+	return false;
+}
 
+function resetForm() {
+	document.getElementById('msg').style.display='none';
+}
 
+const form = document.getElementById('form');
+form.addEventListener('reset', resetForm);
 </script>
 </html>

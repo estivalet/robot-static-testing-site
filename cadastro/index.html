@@ -376,15 +376,18 @@ else if(idade()<18) {
  }
 
 function valida() {
-	var invalid;
 	if(document.getElementById("nome_cliente").value=='') {
-		invalid = true;
 		document.getElementById('msg').className = 'alert alert-danger';
 		document.getElementById('msg').innerHTML = 'Nome é obrigatório!';
+	} else if(document.getElementById("cpf").value==''){
+		document.getElementById('msg').className = 'alert alert-danger';
+		document.getElementById('msg').innerHTML = 'CPF é obrigatório!';
+	} else {
+		document.getElementById('msg').className = 'alert alert-success';
+		document.getElementById('msg').innerHTML = 'Cliente cadastrado com sucesso!';
 	}
-	invalid = false;
 	document.getElementById('msg').style.display='block';
-	return invalid;
+	return false;
 }
 
 function resetForm() {
